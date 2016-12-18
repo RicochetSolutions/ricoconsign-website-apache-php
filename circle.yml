@@ -1,0 +1,25 @@
+machine:
+  services:
+    - docker
+
+checkout:
+  post:
+    - git clone https://github.com/RicochetSolutions/omnificent.git
+    - find ./omnificent -name "*.sh" -exec chmod u+x {} \;
+
+dependencies:
+  pre:
+    - docker login -u $DOCKER_USER -p $DOCKER_PASS -e $DOCKER_EMAIL
+    - rm /opt/circleci/php/$(phpenv global)/etc/conf.d/xdebug.ini
+
+test:
+  pre:
+    - docker build --tag="ricochetsolutions/ricoconsign-website-apache-php:latest" ./
+
+deployment:
+  production:
+    branch: [master]
+    commands:
+      - docker push ricochetsolutions/ricoconsign-website-apache-php:latest
+
+      - ./omnificent/AWS/ECS/deploy.sh latest web-production-cluster us-west-2 ricoconsign-website-production-service ./omnificent/AWS/ECS/task-definitions/ricoconsign-website/ricoconsign-website-production-task-definition.json ricoconsign-website-production-task-definition ricoconsign-website-production-task-definition
