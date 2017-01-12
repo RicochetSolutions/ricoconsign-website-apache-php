@@ -8,6 +8,7 @@ RUN apt-get update
 
 RUN apt-get install -y \
     libmcrypt-dev \
+    mysql-client \
     zlib1g-dev
 
 RUN docker-php-ext-install \
