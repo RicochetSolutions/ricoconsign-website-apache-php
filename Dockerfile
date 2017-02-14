@@ -8,6 +8,7 @@ RUN apt-get update
 
 RUN apt-get install -y \
     libmcrypt-dev \
+    libxml2-dev \
     mysql-client \
     zlib1g-dev
 
