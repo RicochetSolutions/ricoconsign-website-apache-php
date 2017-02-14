@@ -16,6 +16,7 @@ RUN docker-php-ext-install \
     mbstring \
     mysqli \
     opcache \
+    soap \
     zip
 
 # Install GD library.
