@@ -21,5 +21,3 @@ deployment:
     branch: [master]
     commands:
       - docker push ricochetsolutions/ricoconsign-website-apache-php:latest
-
-      - ./omnificent/AWS/ECS/deploy.sh latest web-production-cluster us-west-2 ricoconsign-website-production-service ./omnificent/AWS/ECS/task-definitions/ricoconsign-website/ricoconsign-website-production-task-definition.json ricoconsign-website-production-task-definition ricoconsign-website-production-task-definition
